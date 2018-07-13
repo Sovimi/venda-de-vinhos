@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var cors = require('cors');
 var passport = require('passport');
 
 var wine = require('./routes/wine');
@@ -20,6 +21,10 @@ require('./config/passport');
 
 var app = express();
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
@@ -28,7 +33,7 @@ app.use('/wines', express.static(path.join(__dirname, 'dist')));
 app.use('/wine', wine);
 app.use('/user', user);
 app.use(cookieParser());
-//app.use(cors());
+app.use(cors());
 
 // [SH] Initialise Passport before using the route middleware
 app.use(passport.initialize());

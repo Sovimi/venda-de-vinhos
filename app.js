@@ -8,6 +8,7 @@ var passport = require('passport');
 
 var wine = require('./routes/wine');
 var auth = require('./routes/index');
+var user = require('./routes/user');
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/wines', express.static(path.join(__dirname, 'dist')));
 app.use('/wine', wine);
+app.use('/user', user);
 app.use(cookieParser());
 //app.use(cors());
 
@@ -32,7 +34,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 // [SH] Use the API routes when path starts with /api
-app.use('/', auth);
+//app.use('/', auth);
 
 
 // catch 404 and forward to error handler

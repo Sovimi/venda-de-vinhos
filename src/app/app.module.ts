@@ -2,18 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { WineComponent } from './wine/wine.component';
 import { WineDetailComponent } from './wine-detail/wine-detail.component';
-
-import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
 import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
-import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
   { path: '', 
@@ -30,7 +29,8 @@ const appRoutes: Routes = [
     data: { title: 'Wine Details' }
   },
   { path: 'login', 
-    component: LoginComponent 
+    component: LoginComponent, 
+    data: { title: 'Login' }
   },
   { path: 'register', 
     component: RegisterComponent 

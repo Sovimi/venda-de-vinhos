@@ -13,10 +13,11 @@ var user = require('./routes/user');
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost/wineCellar', {promiseLibrary: require('bluebird') })
-  .then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err));
-
+//mongoose.connect('mongodb://localhost/wineCellar', {promiseLibrary: require('bluebird') })
+//  .then(() =>  console.log('connection succesful'))
+//  .catch((err) => console.error(err));
+// [SH] Bring in the data model
+require('./models/db');
 require('./config/passport');
 
 var app = express();
@@ -29,6 +30,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use('/', auth);
 app.use('/wines', express.static(path.join(__dirname, 'dist')));
 app.use('/wine', wine);
 app.use('/user', user);
@@ -39,7 +41,9 @@ app.use(cors());
 app.use(passport.initialize());
 
 // [SH] Use the API routes when path starts with /api
-//app.use('/', auth);
+app.use('/login', auth);
+app.use('/register', auth);
+app.use('/profile', auth);
 
 
 // catch 404 and forward to error handler

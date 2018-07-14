@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
+import { CartComponent } from './cart/cart.component';
 
 const appRoutes: Routes = [
   { path: '', 
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

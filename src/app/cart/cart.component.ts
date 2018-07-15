@@ -32,7 +32,8 @@ export class CartComponent implements OnInit {
   }
 
   incProductQuantity(id, wineID, data){
-    data = data + 1;
+    console.log(data);
+    //data = data + 1;
     this.updateProductQuantity(id, 'processing', wineID, data);
   }
 
@@ -45,7 +46,7 @@ export class CartComponent implements OnInit {
 
   updateProductQuantity(id, state, wineID, data) {
     this.http.put('/order/'+ id + '/' + state + '/' + wineID, data)
-      .subscribe(data => {
+      .subscribe(res => {
       }, (err) => {
         console.log(err);
       }
@@ -53,7 +54,7 @@ export class CartComponent implements OnInit {
   }
 
   deleteProduct(id, wineID) {
-    this.http.delete('/order/'+ id + '/' + wineID, wineID)
+    this.http.put('/order/'+ id + '/' + wineID, wineID)
       .subscribe(res => {
         }, (err) => {
           console.log(err);

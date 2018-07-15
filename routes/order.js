@@ -23,7 +23,7 @@ router.get('/:id', function(req, res) {
 /* GET PROCESSING USER ORDER DETAILS*/
 router.get('/:id/:state', function(req, res) {
   Order.findOne({'userID': req.params.id, 'state': req.params.state}).
-  populate('products.wineID').
+  populate('products._id').
   exec(function(err, orders) {
     if (err) return next(err);
     res.json(orders);
@@ -32,30 +32,25 @@ router.get('/:id/:state', function(req, res) {
 
 /* UPDATE PRODUCT QUANTITY */
 router.put('/:id/:state/:wineID', function(req, res, next) {
-  Order.findByIdAndUpdate(req.params.id,
-    { "products.$": { "quantity": req.body }
-    }, function (err, post) {
-    if (err) return next(err);
-    console.log(req.body)
-    res.json(post);
-  });
+    Order.findOneAndUpdate({'_id': req.params.id}, 
+      {'$set': {'products': {'quantity': 1, '_id' : req.params.wineID} } },
+      function (err, post) {
+        if (err) return next(err);
+        console.log(post);
+        res.json(post);
+      });
 });
 
 /* DELETE PRODUCT FROM ORDER */
-router.delete('/:id/:wineID', function(req, res, next) {
-    Order.findById(req.params.id, 
+router.put('/:id/:wineID', function(req, res, next) {
+    Order.findOneAndUpdate({'_id': req.params.id}, 
+    {'$pull': {'products': {'_id': req.params.wineID.toString()} } },
+    { 'upsert' : true, 'multi': true, 'new': true },
     function (err, post) {
       if (err) return next(err);
-      
-      post.products.pull(req.params.wineID)
-      post.save(function(err, editedOrder){
-        if(err){
-            return console.log(err)
-        }
-        console.log(editedOrder.products.length);
-        console.log(req.params.wineID)
-      })
+      console.log(post);
       res.json(post);
+    post.save();
     });
   });
 

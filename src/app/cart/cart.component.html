@@ -10,19 +10,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of order.products">
-        <td>{{ product.wineID.name }}</td>
-        <td>{{ product.wineID.price }}</td>
+        <td>{{ product._id.name }}</td>
+        <td>{{ product._id.price }}</td>
         <td>
           {{ product.quantity }}
-          <button type="button" class="btn btn-default btn-sm" (click)="incProductQuantity(order._id, product.wineID._id, product.quantity)">
+          <button type="button" class="btn btn-default btn-sm" (click)="incProductQuantity(order._id, product._id._id, product._id.quantity)">
               <span class="glyphicon glyphicon-chevron-up"></span>
           </button>
-          <button type="button" class="btn btn-default btn-sm" (click)="decProductQuantity(order._id, product.wineID._id, product.quantity)">
+          <button type="button" class="btn btn-default btn-sm" (click)="decProductQuantity(order._id, product._id._id, product._id.quantity)">
               <span class="glyphicon glyphicon-chevron-down"></span>
           </button>
         </td>
         <td>
-            <button type="button" class="btn btn-default btn-sm" (click)="deleteProduct(order._id, product.wineID._id)">
+            <button type="button" class="btn btn-default btn-sm" (click)="deleteProduct(order._id, product._id._id)">
                 <span class="glyphicon glyphicon-trash"></span>
             </button>
         </td>

@@ -10,6 +10,7 @@ var passport = require('passport');
 var wine = require('./routes/wine');
 var auth = require('./routes/index');
 var user = require('./routes/user');
+var order = require('./routes/order')
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -34,6 +35,7 @@ app.use('/', auth);
 app.use('/wines', express.static(path.join(__dirname, 'dist')));
 app.use('/wine', wine);
 app.use('/user', user);
+app.use('/order', order);
 app.use(cookieParser());
 app.use(cors());
 
@@ -44,6 +46,8 @@ app.use(passport.initialize());
 app.use('/login', auth);
 app.use('/register', auth);
 app.use('/profile', auth);
+app.use('/cart', auth);
+app.use('/orders', express.static(path.join(__dirname, 'dist')));
 
 
 // catch 404 and forward to error handler

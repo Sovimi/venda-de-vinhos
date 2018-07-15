@@ -14,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
 import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 const appRoutes: Routes = [
   { path: '', 
@@ -39,6 +41,19 @@ const appRoutes: Routes = [
   { path: 'profile', 
     component: ProfileComponent, 
     canActivate: [AuthGuardService] 
+  },
+  { path: 'cart/:id', 
+    component: CartComponent, 
+    canActivate: [AuthGuardService]
+  },
+  { path: 'orders/:id', 
+    component: OrderComponent, 
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'order-details/:id',
+    component: OrderDetailComponent,
+    data: { title: 'Order Details' }
   }
 ];
 
@@ -51,7 +66,9 @@ const appRoutes: Routes = [
     LoginComponent,
     ProfileComponent,
     HomeComponent,
-    CartComponent
+    CartComponent,
+    OrderComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

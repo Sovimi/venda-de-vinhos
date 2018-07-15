@@ -8,4 +8,5 @@
     <p class="form-control-static">{{ details?.email }}</p>
   </div>
   <p>You can see our wine list here <a routerLink="/wines">Our Wines</a></p>
+  <p>Your orders list here <a [routerLink]="['/orders', details?._id]">Orders</a></p>
 </div>

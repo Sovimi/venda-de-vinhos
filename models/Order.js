@@ -1,13 +1,14 @@
 var mongoose = require('mongoose');
 
 var OrderSchema = new mongoose.Schema({
-    userID:{type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    userID: String,
     date: { type: Date, default: Date.now },
     total: Number,
     state: String,
     products: [
         {
-            wineID: {type: mongoose.Schema.Types.ObjectId, ref: 'Wine'}, 
+            //wineID: {type: mongoose.Schema.Types.ObjectId, ref: 'Wine'}, 
+            wineID: String,
             quantity: Number
         }],
   });

@@ -12,6 +12,9 @@ var ctrlAuth = require('../controllers/auth.js');
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
 
+// cart
+router.get('/cart', auth, ctrlProfile.profileRead);
+
 // authentication
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);

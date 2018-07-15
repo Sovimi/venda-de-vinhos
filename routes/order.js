@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Order = require('../models/Order.js');
-var User = require('../models/User.js');
 
 /* GET ALL ORDERS */
 router.get('/', function(req, res, next) {
@@ -13,15 +12,22 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET ALL ORDERS OF A USER*/
-router.get('/orders', function(req, res) {
-    Order.find({'userID': req.user.id }, function(err, orders) {
-      if (err)
-        return done(err);
-      if (user) {
-        console.log(orders);
-      }
+router.get('/:id', function(req, res) {
+    Order.find({'userID': req.params.id}, function(err, orders) {
+      if (err) return next(err);
+      res.json(orders);
+      console.log(req.params.id);
     });
   });
+
+/* GET PROCESSING USER ORDER*/
+router.get('/:id/:state', function(req, res) {
+  Order.find({'userID': req.params.id, 'state': req.params.state}, function(err, orders) {
+    if (err) return next(err);
+    res.json(orders);
+    console.log(req.params.state);
+  });
+});
 
 /* UPDATE PRODDUCT QUANTITY */
 router.put('/:id', function(req, res, next) {

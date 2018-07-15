@@ -7,8 +7,8 @@ var OrderSchema = new mongoose.Schema({
     state: String,
     products: [
         {
-            //wineID: {type: mongoose.Schema.Types.ObjectId, ref: 'Wine'}, 
-            wineID: String,
+            wineID: {type: mongoose.Schema.Types.ObjectId, ref: 'Wine'}, 
+            //wineID: String,
             quantity: Number
         }],
   });

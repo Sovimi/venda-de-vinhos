@@ -3,17 +3,32 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Action</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let order of orders">
-        <td>{{ order.date }}</td>
-        <td>{{ order.state }}</td>
-        <td>Show Detail</td>
+      <tr *ngFor="let product of order.products">
+        <td>{{ product.wineID.name }}</td>
+        <td>{{ product.wineID.price }}</td>
+        <td>
+          {{ product.quantity }}
+          <button type="button" class="btn btn-default btn-sm" (click)="incProductQuantity(order._id, product.wineID._id, product.quantity)">
+              <span class="glyphicon glyphicon-chevron-up"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-sm" (click)="decProductQuantity(order._id, product.wineID._id, product.quantity)">
+              <span class="glyphicon glyphicon-chevron-down"></span>
+          </button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-default btn-sm" (click)="deleteProduct(order._id, product.wineID._id)">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </td>
       </tr>
     </tbody>
   </table>
+  <button class="btn btn-danger" type="button" (click)="deleteOrder(order._id, order.userID)">Delete</button>
+  <button class="btn btn-danger" type="button" (click)="completeOrder(order._id, order.userID)">Complete</button>
 </div>

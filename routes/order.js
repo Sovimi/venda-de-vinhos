@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Order = require('../models/Order.js');
+var Wine = require('../models/Wine.js');
 
 /* GET ALL ORDERS */
 router.get('/', function(req, res, next) {
@@ -16,38 +17,53 @@ router.get('/:id', function(req, res) {
     Order.find({'userID': req.params.id}, function(err, orders) {
       if (err) return next(err);
       res.json(orders);
-      console.log(req.params.id);
     });
   });
 
-/* GET PROCESSING USER ORDER*/
+/* GET PROCESSING USER ORDER DETAILS*/
 router.get('/:id/:state', function(req, res) {
-  Order.find({'userID': req.params.id, 'state': req.params.state}, function(err, orders) {
+  Order.findOne({'userID': req.params.id, 'state': req.params.state}).
+  populate('products.wineID').
+  exec(function(err, orders) {
     if (err) return next(err);
     res.json(orders);
-    console.log(req.params.state);
   });
 });
 
-/* UPDATE PRODDUCT QUANTITY */
-router.put('/:id', function(req, res, next) {
-  Order.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+/* UPDATE PRODUCT QUANTITY */
+router.put('/:id/:state/:wineID', function(req, res, next) {
+  Order.findByIdAndUpdate(req.params.id,
+    { "products.$": { "quantity": req.body }
+    }, function (err, post) {
     if (err) return next(err);
+    console.log(req.body)
     res.json(post);
   });
 });
 
 /* DELETE PRODUCT FROM ORDER */
-router.put('/:id', function(req, res, next) {
-    Order.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+router.delete('/:id/:wineID', function(req, res, next) {
+    Order.findById(req.params.id, 
+    function (err, post) {
       if (err) return next(err);
+      
+      post.products.pull(req.params.wineID)
+      post.save(function(err, editedOrder){
+        if(err){
+            return console.log(err)
+        }
+        console.log(editedOrder.products.length);
+        console.log(req.params.wineID)
+      })
       res.json(post);
     });
   });
 
 /* SAVE ORDER */
-router.post('/', function(req, res, next) {
-    Order.create(req.body, function (err, post) {
+router.put('/:id', function(req, res, next) {
+    Order.findByIdAndUpdate(req.params.id, 
+    {'state':'completed'}, 
+    function (err, post) {
       if (err) return next(err);
       res.json(post);
     });

@@ -14,10 +14,10 @@
         <td>{{ product._id.price }}</td>
         <td>
           {{ product.quantity }}
-          <button type="button" class="btn btn-default btn-sm" (click)="incProductQuantity(order._id, product._id._id, product._id.quantity)">
+          <button type="button" class="btn btn-default btn-sm" (click)="incProductQuantity(order._id, product._id._id, product.quantity)">
               <span class="glyphicon glyphicon-chevron-up"></span>
           </button>
-          <button type="button" class="btn btn-default btn-sm" (click)="decProductQuantity(order._id, product._id._id, product._id.quantity)">
+          <button type="button" class="btn btn-default btn-sm" (click)="decProductQuantity(order._id, product._id._id, product.quantity)">
               <span class="glyphicon glyphicon-chevron-down"></span>
           </button>
         </td>

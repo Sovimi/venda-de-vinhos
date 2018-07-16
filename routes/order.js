@@ -31,28 +31,27 @@ router.get('/:id/:state', function(req, res) {
 });
 
 /* UPDATE PRODUCT QUANTITY */
-router.put('/:id/:state/:wineID', function(req, res, next) {
-    Order.findOneAndUpdate({'_id': req.params.id}, 
-      {'$set': {'products': {'quantity': 1, '_id' : req.params.wineID} } },
-      function (err, post) {
-        if (err) return next(err);
-        console.log(post);
-        res.json(post);
-      });
-});
-
-/* DELETE PRODUCT FROM ORDER */
-router.put('/:id/:wineID', function(req, res, next) {
-    Order.findOneAndUpdate({'_id': req.params.id}, 
-    {'$pull': {'products': {'_id': req.params.wineID.toString()} } },
-    { 'upsert' : true, 'multi': true, 'new': true },
+router.put('/:id/:wineID/:quantity', function(req, res, next) {
+  Order.findOneAndUpdate({'_id': req.params.id}, 
+    {'$set': {'products': {'quantity': 2, '_id' : req.params.wineID} } },
     function (err, post) {
       if (err) return next(err);
       console.log(post);
       res.json(post);
+    });
+});
+
+/* DELETE PRODUCT FROM ORDER */
+router.put('/:id/:wineID', function(req, res, next) {
+  Order.findOneAndUpdate({'_id': req.params.id}, 
+    {'$pull': {'products': {'_id': req.params.wineID.toString()} } },
+    { 'upsert' : true, 'multi': true, 'new': true },
+    function (err, post) {
+      if (err) return next(err);
+      res.json(post);
     post.save();
     });
-  });
+});
 
 /* SAVE ORDER */
 router.put('/:id', function(req, res, next) {
@@ -63,6 +62,14 @@ router.put('/:id', function(req, res, next) {
       res.json(post);
     });
   });
+
+ /*NEW EMPTY ORDER*/ 
+ router.post('/', function(req, res, next) {
+  Order.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 
 /* DELETE ORDER */
 router.delete('/:id', function(req, res, next) {

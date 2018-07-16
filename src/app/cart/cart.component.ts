@@ -31,21 +31,21 @@ export class CartComponent implements OnInit {
     });
   }
 
-  incProductQuantity(id, wineID, data){
-    console.log(data);
-    //data = data + 1;
-    this.updateProductQuantity(id, 'processing', wineID, data);
+  incProductQuantity(id, wineID, quantity){
+    console.log(quantity);
+    quantity = quantity + 1;
+    this.updateProductQuantity(id, wineID, quantity);
   }
 
-  decProductQuantity(id, wineID, data){
-    if (data > 0) {
-      data = data - 1;
+  decProductQuantity(id, wineID, quantity){
+    if (quantity > 0) {
+      quantity = quantity - 1;
     }
-    this.updateProductQuantity(id,'processing', wineID, data);
+    this.updateProductQuantity(id, wineID, quantity);
   }
 
-  updateProductQuantity(id, state, wineID, data) {
-    this.http.put('/order/'+ id + '/' + state + '/' + wineID, data)
+  updateProductQuantity(id, wineID, data) {
+    this.http.put('/order/'+ id + '/' + wineID + '/' + data, {})
       .subscribe(res => {
       }, (err) => {
         console.log(err);
@@ -85,7 +85,7 @@ export class CartComponent implements OnInit {
   }
 
   newOrder(userID) {
-    this.http.post('/order', {'userID': userID, 'state': 'processing'})
+    this.http.post('/order', {'userID': userID, 'state': 'processing', 'total': 0})
       .subscribe(res => {
         }, (err) => {
           console.log(err);

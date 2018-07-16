@@ -1,5 +1,8 @@
 <div class="container">
   <h1>{{ wine.name }}</h1>
+  <button type="button" class="btn btn-default btn-sm" (click)="addProduct(details?._id, wine._id)">
+      <span class="glyphicon glyphicon-plus"></span> Add to cart
+  </button>
   <dl class="list">
     <dt>Year</dt>
     <dd>{{ wine.year }}</dd>
@@ -8,6 +11,8 @@
     <dt>Type</dt>
     <dd>{{ wine.type }}</dd>
     <dt>Price</dt>
-    <dd>{{ book.price }}</dd>
+    <dd>{{ wine.price }}</dd>
+    <dt>Description</dt>
+    <dd>{{ wine.description }}</dd>
   </dl>
 </div>

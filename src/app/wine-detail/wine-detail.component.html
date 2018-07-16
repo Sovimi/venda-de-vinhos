@@ -1,18 +1,80 @@
-<div class="container">
-  <h1>{{ wine.name }}</h1>
-  <button type="button" class="btn btn-default btn-sm" (click)="addProduct(details?._id, wine._id)">
-      <span class="glyphicon glyphicon-plus"></span> Add to cart
-  </button>
-  <dl class="list">
-    <dt>Year</dt>
-    <dd>{{ wine.year }}</dd>
-    <dt>Brand</dt>
-    <dd>{{ wine.brand }}</dd>
-    <dt>Type</dt>
-    <dd>{{ wine.type }}</dd>
-    <dt>Price</dt>
-    <dd>{{ wine.price }}</dd>
-    <dt>Description</dt>
-    <dd>{{ wine.description }}</dd>
-  </dl>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-3">
+
+          <div class="card mt-4">
+            <img class="card-img-top img-fluid" src="{{ wine.img_url }}" alt="">
+            <div class="card-body">
+              <h3 class="card-title">{{ wine.name }}</h3>
+              <h4>{{ wine.price }}</h4>
+              <p class="card-text">{{ wine.type }}</p>
+              <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+              4.0 stars
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="card mt-4">
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Specs</h5>
+                  <p class="card-text">{{ wine.year }}</p>
+                  <p class="card-text">{{ wine.brand }}</p>
+                  <div *ngFor="let casta of wine.castas">                    
+                    <p class="card-text">{{ casta.name }}, {{ casta.percent }}, {{ casta.color }}</p>
+                  </div>
+                  <p class="card-text">{{ wine.description }}</p>
+                  <button type="button" class="btn btn-default btn-sm" (click)="addProduct(details?._id, wine._id)">
+                    <span class="glyphicon glyphicon-plus"></span> Add to cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          <!-- /.card -->
+          </div>
+          <!-- /.col-lg-6 -->
+
+          <div class="col-lg-9">
+          <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+              Product Reviews
+            </div>
+            <div class="card-body">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+              <hr>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+              <hr>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+              <hr>
+              <a href="#" class="btn btn-success">Leave a Review</a>
+            </div>
+          </div>
+          <!-- /.card -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+  </body>
+</html>

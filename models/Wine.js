@@ -10,6 +10,7 @@ var WineSchema = new mongoose.Schema({
     price: String,
     castas: [
         {name: String, percent: Number, color: String}],
+    img_url: String,
   });
 
   module.exports = mongoose.model('Wine', WineSchema);

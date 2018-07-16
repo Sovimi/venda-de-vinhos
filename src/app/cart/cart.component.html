@@ -1,34 +1,50 @@
-<div class="container">
-  <h1>Shopping cart</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of order.products">
-        <td>{{ product._id.name }}</td>
-        <td>{{ product._id.price }}</td>
-        <td>
-          {{ product.quantity }}
-          <button type="button" class="btn btn-default btn-sm" (click)="incProductQuantity(order._id, product._id._id, product.quantity)">
-              <span class="glyphicon glyphicon-chevron-up"></span>
-          </button>
-          <button type="button" class="btn btn-default btn-sm" (click)="decProductQuantity(order._id, product._id._id, product.quantity)">
-              <span class="glyphicon glyphicon-chevron-down"></span>
-          </button>
-        </td>
-        <td>
-            <button type="button" class="btn btn-default btn-sm" (click)="deleteProduct(order._id, product._id._id)">
-                <span class="glyphicon glyphicon-trash"></span>
-            </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
+      <div class="container">
+          <h1>Shopping cart</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of order.products">
+                <td>{{ product._id.name }}</td>
+                <td>{{ product._id.price }}</td>
+                <td>
+                  {{ product.quantity }}
+                  <button type="button" class="btn btn-default btn-sm" (click)="incProductQuantity(order._id, product._id._id, product.quantity)">
+                      <i class="	fa fa-angle-up"></i>
+                  </button>
+                  <button type="button" class="btn btn-default btn-sm" (click)="decProductQuantity(order._id, product._id._id, product.quantity)">
+                      <i class="fa fa-angle-down"></i>
+                  </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-sm" (click)="deleteProduct(order._id, product._id._id)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td><a class="btn btn-dark" routerLink="/wines"><i class="fa fa-angle-left"></i> Back to Shop</a></td>
+                <td colspan="2" class="hidden-xs"></td>
+							  <td class="hidden-xs text-center"><strong>{{ order.total }}</strong></td>
+                <td><button class="btn btn-danger" type="button" (click)="completeOrder(order._id, order.userID)">Complete</button></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+  </body>
+</html>
+<!--
   <button class="btn btn-danger" type="button" (click)="deleteOrder(order._id, order.userID)">Delete</button>
-  <button class="btn btn-danger" type="button" (click)="completeOrder(order._id, order.userID)">Complete</button>
-</div>
+-->

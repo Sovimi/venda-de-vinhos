@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService, UserDetails } from '../authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  details: UserDetails;
 
-  constructor() { }
+  constructor(public auth: AuthenticationService) {}
 
   ngOnInit() {
+    this.auth.profile().subscribe(user => {
+      this.details = user;
+    }, (err) => {
+      console.error(err);
+    });
   }
 
 }

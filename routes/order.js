@@ -20,7 +20,17 @@ router.get('/:id', function(req, res) {
     });
   });
 
-/* GET PROCESSING USER ORDER DETAILS*/
+  /* GET USER ORDER DETAILS*/
+router.get('/:id', function(req, res) {
+  Order.findById(req.params.orderID).
+  populate('products._id').
+  exec(function(err, orders) {
+    if (err) return next(err);
+    res.json(orders);
+  });
+});
+
+/* GET USER PROCESSING ORDER DETAILS*/
 router.get('/:id/:state', function(req, res) {
   Order.findOne({'userID': req.params.id, 'state': req.params.state}).
   populate('products._id').

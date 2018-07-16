@@ -31,34 +31,36 @@ export class CartComponent implements OnInit {
     });
   }
 
-  incProductQuantity(id, wineID, quantity){
+  incProductQuantity(userID, id, wineID, quantity){
     console.log(quantity);
     quantity = quantity + 1;
-    this.updateProductQuantity(id, wineID, quantity);
+    this.updateProductQuantity(userID, id, wineID, quantity);
   }
 
-  decProductQuantity(id, wineID, quantity){
+  decProductQuantity(userID, id, wineID, quantity){
     if (quantity > 1) {
       quantity = quantity - 1;      
-      this.updateProductQuantity(id, wineID, quantity);
+      this.updateProductQuantity(userID, id, wineID, quantity);
     }
     else {
-      this.deleteProduct(id, wineID);
+      this.deleteProduct(userID, id, wineID);
     }
   }
 
-  updateProductQuantity(id, wineID, data) {
+  updateProductQuantity(userID, id, wineID, data) {
     this.http.put('/order/'+ id + '/' + wineID + '/' + data, {})
       .subscribe(res => {
+        this.getCartDetail(userID, 'processing');
       }, (err) => {
         console.log(err);
       }
     );
   }
 
-  deleteProduct(id, wineID) {
+  deleteProduct(userID, id, wineID) {
     this.http.put('/order/'+ id + '/' + wineID, wineID)
       .subscribe(res => {
+        this.getCartDetail(userID, 'processing');
         }, (err) => {
           console.log(err);
         }

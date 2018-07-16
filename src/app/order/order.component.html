@@ -1,21 +1,29 @@
-<div class="container">
-  <h1>Orders List</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>State</th>
-        <th>Total</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orders">
-        <td>{{ order.date }}</td>
-        <td>{{ order.state }}</td>
-        <td>{{ order.total }}</td>
-        <td><a [routerLink]="['/order-details', order._id]">Show Detail</a></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
+      <div class="container">
+          <h1>Orders List</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>State</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders">
+                <td>{{ order.date }}</td>
+                <td>{{ order.state }}</td>
+                <td>{{ order.total }}</td>
+                <td>{{ order._id }}</td>
+                <!--<td><a [routerLink]="['/order-details', order._id]">Show Detail</a></td>
+                --></tr>
+            </tbody>
+          </table>
+        </div>
+  </body>
+</html>

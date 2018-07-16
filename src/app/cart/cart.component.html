@@ -19,15 +19,15 @@
                 <td>{{ product._id.price }}</td>
                 <td>
                   {{ product.quantity }}
-                  <button type="button" class="btn btn-default btn-sm" (click)="incProductQuantity(order._id, product._id._id, product.quantity)">
+                  <button type="button" class="btn btn-default btn-sm" (click)="incProductQuantity(details._id, order._id, product._id._id, product.quantity)">
                       <i class="	fa fa-angle-up"></i>
                   </button>
-                  <button type="button" class="btn btn-default btn-sm" (click)="decProductQuantity(order._id, product._id._id, product.quantity)">
+                  <button type="button" class="btn btn-default btn-sm" (click)="decProductQuantity(details._id, order._id, product._id._id, product.quantity)">
                       <i class="fa fa-angle-down"></i>
                   </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-default btn-sm" (click)="deleteProduct(order._id, product._id._id)">
+                    <button type="button" class="btn btn-default btn-sm" (click)="deleteProduct(details._id, order._id, product._id._id)">
                         <i class="fa fa-trash"></i>
                     </button>
                 </td>

@@ -23,6 +23,4 @@ export class OrderDetailComponent implements OnInit {
       this.order = data;
     });
   }
-
-
 }

@@ -23,7 +23,8 @@ router.get('/:id', function(req, res, next) {
 /* ADD PRODUCT TO ORDER */
 router.put('/:userID/:wineID', function(req, res, next) {
     Order.findOneAndUpdate({'userID': req.params.userID, 'state': 'processing'}, 
-      {'$push': {'products': { '_id' : req.params.wineID, 'quantity': 1} } },
+      {'$push': {'products': { '_id' : req.params.wineID, 'quantity': 1} },
+        '$set': {'userID': req.params.userID, 'state': 'processing'} },
       { 'upsert' : true, 'new': false },
       function (err, post) {
         if (err) return next(err);

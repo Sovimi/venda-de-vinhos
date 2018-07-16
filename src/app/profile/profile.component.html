@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
 <div class="form-horizontal">
   <div class="form-group">
     <label class="col-sm-3 control-label">Full name</label>
@@ -8,5 +13,7 @@
     <p class="form-control-static">{{ details?.email }}</p>
   </div>
   <p>You can see our wine list here <a routerLink="/wines">Our Wines</a></p>
-  <p>Your orders list here <a [routerLink]="['/orders', details?._id]">Orders</a></p>
+  <p>Your orders list here <a [routerLink]="['/orders', details._id]">Orders</a></p>
 </div>
+</body>
+</html>

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Order = require('../models/Order.js');
-var Wine = require('../models/Wine.js');
 
 /* GET ALL ORDERS */
 router.get('/', function(req, res, next) {
@@ -34,9 +33,9 @@ router.get('/:id', function(req, res) {
 router.get('/:id/:state', function(req, res) {
   Order.findOne({'userID': req.params.id, 'state': req.params.state}).
   populate('products._id').
-  exec(function(err, orders) {
+  exec(function(err, order) {
     if (err) return next(err);
-    res.json(orders);
+    res.json(order);
   });
 });
 
@@ -44,6 +43,16 @@ router.get('/:id/:state', function(req, res) {
 router.put('/:id/:wineID/:quantity', function(req, res, next) {
   Order.findOneAndUpdate({'_id': req.params.id}, 
     {'$set': {'products': {'quantity': req.params.quantity, '_id' : req.params.wineID} } },
+    function (err, post) {
+      if (err) return next(err);
+      res.json(post);
+    });
+});
+
+/* UPDATE ORDER TOTAL PRICE */
+router.put('/:id/:total', function(req, res, next) {
+  Order.findOneAndUpdate({'_id': req.params.id}, 
+    {'total' : req.params.total},
     function (err, post) {
       if (err) return next(err);
       console.log(post);

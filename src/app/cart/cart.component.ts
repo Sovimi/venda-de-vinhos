@@ -11,11 +11,14 @@ import { AuthenticationService, UserDetails } from '../authentication.service';
 export class CartComponent implements OnInit {
   details: UserDetails;
   order = {};
+  product = {}
+  total = 0;
 
   constructor(private route: ActivatedRoute, private router: Router, private auth: AuthenticationService, private http: HttpClient) {}
 
   ngOnInit() {
-        
+    let total = 0;
+
     this.auth.profile().subscribe(user => {
       this.details = user;
     }, (err) => {
@@ -23,6 +26,11 @@ export class CartComponent implements OnInit {
     });
     
     this.getCartDetail(this.route.snapshot.params['id'], 'processing');
+  }
+
+  setTotal(productPrice, productQuantity){
+    this.total += productPrice * productQuantity;
+    return 0;
   }
 
   getCartDetail(id, state) {
@@ -65,6 +73,18 @@ export class CartComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+
+  updateTotalPrice(id, userID){
+    this.http.put('/order/'+ id + '/' + this.total, {})
+      .subscribe(res => {
+        this.getCartDetail(userID, 'processing');
+        return res;
+      }, (err) => {
+        console.log(err);
+      }
+    );
+
   }
 
   deleteOrder(id, userID) {

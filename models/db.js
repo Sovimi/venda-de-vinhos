@@ -47,4 +47,5 @@ process.on('SIGTERM', function() {
 
 // BRING IN YOUR SCHEMAS & MODELS
 require('./User');
-require('./Wine')
+require('./Wine');
+require('./Order');

@@ -38,10 +38,13 @@ export class CartComponent implements OnInit {
   }
 
   decProductQuantity(id, wineID, quantity){
-    if (quantity > 0) {
-      quantity = quantity - 1;
+    if (quantity > 1) {
+      quantity = quantity - 1;      
+      this.updateProductQuantity(id, wineID, quantity);
     }
-    this.updateProductQuantity(id, wineID, quantity);
+    else {
+      this.deleteProduct(id, wineID);
+    }
   }
 
   updateProductQuantity(id, wineID, data) {

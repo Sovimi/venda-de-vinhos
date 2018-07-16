@@ -33,7 +33,7 @@ router.get('/:id/:state', function(req, res) {
 /* UPDATE PRODUCT QUANTITY */
 router.put('/:id/:wineID/:quantity', function(req, res, next) {
   Order.findOneAndUpdate({'_id': req.params.id}, 
-    {'$set': {'products': {'quantity': 2, '_id' : req.params.wineID} } },
+    {'$set': {'products': {'quantity': req.params.quantity, '_id' : req.params.wineID} } },
     function (err, post) {
       if (err) return next(err);
       console.log(post);
